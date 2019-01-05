@@ -1,24 +1,5 @@
-#include<unistd.h>
-#include<wait.h>
-#include<stdlib.h>
-#include<pthread.h>
-#include<queue>
-// PROCESS STATES
-#define PROCESS_STOPPED 0
-#define PROCESS_RUNNING 1
-#define PROCESS_ERROR 2
 
-#define R 0
-#define W 1
-
-struct process
-{
-    int pid;
-    char* command;
-    int exit_status;
-    int state;
-};
-
+#include "def.h"
 
 std::queue<process*> processes;
 
