@@ -9,8 +9,8 @@ CXXFLAGS = -pthread
 # ****************************************************
 # Entries to bring the executable up to date
 
-main: main.o configuration.o executer.o
-	$(CXX) $(CXXFLAGS) -o main main.o configuration.o executer.o
+main: main.o configuration.o executer.o communication.o
+	$(CXX) $(CXXFLAGS) -o main main.o configuration.o executer.o communication.o
 
 main.o: main.cpp def.h
 	$(CXX)  -c main.cpp 
@@ -20,6 +20,9 @@ configuration.o: configuration.cpp def.h
 
 executer.o: executer.cpp def.h
 	$(CXX) $(CXXFLAGS) -c executer.cpp 
+
+communication.o: communication.cpp def.h
+	$(CXX) $(CXXFLAGS) -c communication.cpp 
 
 clean:
 	rm ./*.o

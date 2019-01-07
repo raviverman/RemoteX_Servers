@@ -31,6 +31,35 @@ struct process
     char* command;
     int exit_status;
     int state;
+
+    // add exec time
+};
+
+struct monitor_info
+{
+    struct sockaddr_in monitor; 
+    int socket;
+};
+
+// Message types
+#define MESS_EXEC_COMM 0
+#define MESS_SEND_STAT 1
+
+struct message
+{
+    int type;
+    char command[256];
+    bool isshellcmd;
+    bool respond;
+};
+
+struct response
+{
+    bool isSuccess;
+    char error[256];
+    char resp[256];
+    bool isComplete;
+    bool hasNext;
 };
 
 //configuration
@@ -40,3 +69,8 @@ std::string getConfig(std::string configKey);
 
 //executer
 int executeCommandAsync(char* command);
+
+//comms
+int startServer();
+void readMessage(char *buffer, message* m);
+void writeResponse(response* resp, char* buffer);

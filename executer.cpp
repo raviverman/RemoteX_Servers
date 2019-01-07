@@ -11,6 +11,7 @@ process* createProcessEntry(int pid, char* command)
     newProcess->command = command;
     newProcess->state = PROCESS_RUNNING;
     return newProcess;
+     
 }
 
 void updateProcessEntry(process* p_node, int status)
