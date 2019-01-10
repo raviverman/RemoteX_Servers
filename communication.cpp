@@ -5,7 +5,7 @@ struct sockaddr_in  monitor;
 struct monitor_info mon_info;
 int serverSocket;
 extern bool isVerbose;
-extern std::unordered_map<string, string> config;
+extern std::unordered_map<std::string, std::string> config;
 // Each "client" is a server to which a central manager connects to assign  
 
 int startServer()

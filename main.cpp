@@ -9,10 +9,6 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
     
-    char s[]="echo helow";
-    printf("Something\n");  
-    executeCommandAsync(s);
-    executeCommandAsync(s);
-    
+    startServer();
     return 0;
 }
