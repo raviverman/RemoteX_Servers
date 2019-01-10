@@ -32,6 +32,8 @@ int startServer()
     memcpy(&mon_info.monitor, &monitor, sizeof(struct sockaddr_in));
     mon_info.socket = monitorSocket;
 
+    // start listener
+    pthread_create(NULL, NULL, commandHandler, NULL);
     return monitorSocket;
 }
 
