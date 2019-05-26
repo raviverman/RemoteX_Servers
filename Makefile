@@ -29,3 +29,23 @@ cli.o: cli.cpp def.h
 
 clean:
 	rm ./*.o
+
+debug: main_debug configuration_debug communication_debug cli_debug executer_debug
+	$(CXX) $(CXXFLAGS) -o main main.o configuration.o executer.o communication.o cli.o -g
+	gdb ./main
+
+main_debug: main.cpp def.h
+	$(CXX)  -c main.cpp -g
+
+configuration_debug: configuration.cpp def.h
+	$(CXX) -c configuration.cpp -g
+
+communication_debug: communication.cpp def.h
+	$(CXX) $(CXXFLAGS) -c communication.cpp -g
+
+
+cli_debug: cli.cpp def.h
+	$(CXX) -c cli.cpp -g
+
+executer_debug: executer.cpp def.h
+	$(CXX) -c executer.cpp def.h

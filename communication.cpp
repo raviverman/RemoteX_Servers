@@ -34,6 +34,7 @@ int startServer()
     //copying monitor info to data structure
     memcpy(&mon_info.monitor, &monitor, sizeof(struct sockaddr_in));
     mon_info.socket = monitorSocket;
+    printMessage("Host Control connected.", true);
 
     // start listener
     pthread_t thread_id;

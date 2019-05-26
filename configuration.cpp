@@ -25,7 +25,7 @@ int loadDefaultConfig()
 {
 
     defaultConfig.insert({"ROOT","./"});
-    defaultConfig.insert({"PORT","4020"});
+    defaultConfig.insert({"PORT","4021"});
     defaultConfig.insert({"PROG","echo"});
     defaultConfig.insert({"ARGS","NO PROGRAM"});
     defaultConfig.insert({"TICK","5"});
