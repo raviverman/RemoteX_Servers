@@ -74,3 +74,7 @@ int executeCommandAsync(char* command);
 int startServer();
 void readMessage(char *buffer, message* m);
 void writeResponse(response* resp, char* buffer);
+void* commandHandler(void* id);
+
+//cli
+void printMessage(char* message, bool verbose);

@@ -7,6 +7,8 @@ const string configFile = "configuration.conf";
 
 extern bool isVerbose;
 
+static bool defaultConfigLoaded = false;
+
 static FILE* file = NULL;  
 unordered_map<string, string> defaultConfig;
 unordered_map<string, string> config;
@@ -21,11 +23,13 @@ int validateFile()
 
 int loadDefaultConfig()
 {
+
     defaultConfig.insert({"ROOT","./"});
+    defaultConfig.insert({"PORT","4020"});
     defaultConfig.insert({"PROG","echo"});
     defaultConfig.insert({"ARGS","NO PROGRAM"});
     defaultConfig.insert({"TICK","5"});
-
+    defaultConfigLoaded = true;
 }
 
 int validateKey(string key)
@@ -35,6 +39,7 @@ int validateKey(string key)
 /**
  * Configuration options (must be specified in default options)
  * ROOT=""
+ * PORT=""
  * PROG=""
  * ARGS=""
  * TICK=""
@@ -72,7 +77,11 @@ int loadConfig()
 string getConfig(string configKey)
 {
     if(config.count(configKey) <=0)
+    {
+        if(!defaultConfigLoaded)
+            loadDefaultConfig();
         return defaultConfig[configKey];
+    }
     else
         return config[configKey];
 }

@@ -27,7 +27,6 @@ void* executeCommand(void* args)
     if(pid==0)
     {
         // child
-        sleep(2);
         execl("/bin/sh","sh","-c",command,NULL);
     }
     process* id = createProcessEntry(pid, command);

@@ -12,7 +12,7 @@ int startServer()
 {
     server.sin_addr.s_addr = htonl(INADDR_ANY);
     server.sin_family = PF_INET;
-    server.sin_port = htons(4020);
+    server.sin_port = htons(atoi(getConfig("PORT").c_str()));
 
     serverSocket = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);
     int sockopt = 1;
@@ -20,11 +20,14 @@ int startServer()
     if(bind(serverSocket, (struct sockaddr*)&server, sizeof(server) )  < 0)
     {
         //replace with actual perrror
-        std::cout<<"Port bind error\n";
+        printMessage("Port bind error", true);
         return -1;
     }
 
     listen(serverSocket, 1);
+    char message[64] = "";
+    sprintf(message, "Server running @ %s", getConfig("PORT").c_str());
+    printMessage(message, true);
     socklen_t monitorSize = sizeof(monitor);
     int monitorSocket = accept(serverSocket, (struct sockaddr*)&monitor, &monitorSize);
 
@@ -33,7 +36,8 @@ int startServer()
     mon_info.socket = monitorSocket;
 
     // start listener
-    pthread_create(NULL, NULL, commandHandler, NULL);
+    pthread_t thread_id;
+    pthread_create(&thread_id, NULL, commandHandler, NULL);
     return monitorSocket;
 }
 
